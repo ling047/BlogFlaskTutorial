@@ -38,8 +38,7 @@ Mètodes:
 - update(id) : Permite editar una publicación existente.
 - delete(id) :  Borra una publicación.
 
-
-
+```mermaid
 classDiagram
   class _init_ {
     +create_app(test_config=None)
@@ -73,3 +72,5 @@ _init_ --> db : Inicializa y registra
   auth --> db : Consulta/guarda usuarios
   blog --> db : CRUD de publicaciones
   blog --> auth : Protege rutas con login_required
+
+```
