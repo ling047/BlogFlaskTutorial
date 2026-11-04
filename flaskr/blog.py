@@ -22,6 +22,8 @@ def index():
         " FROM post p JOIN user u ON p.author_id = u.id"
         " ORDER BY created DESC"
     ).fetchall()
+    for post in posts:
+        print("Entrada",dict(post))
     return render_template("blog/index.html", posts=posts)
 
 
