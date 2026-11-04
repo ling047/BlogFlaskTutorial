@@ -40,6 +40,7 @@ sequenceDiagram
     SQLite-->>DB: Conexión cerrada
 ```
 # get
+
 ```Mermaid
 sequenceDiagram
     autonumber
