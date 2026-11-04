@@ -1,3 +1,6 @@
+
+# flask --app flaskr init-db
+
 ```Mermaid
 sequenceDiagram
     autonumber
@@ -35,4 +38,57 @@ sequenceDiagram
     Flask->>DB: teardown_appcontext(close_db)
     DB->>SQLite: db.close()
     SQLite-->>DB: Conexión cerrada
+```
+# get
+```Mermaid
+sequenceDiagram
+    autonumber
+    actor User as Usuario
+    participant Browser as Navegador
+    participant Flask as Flask
+    participant Auth as auth.py
+    participant Blog as blog.py
+    participant DB as db.py
+    participant SQLite as SQLite
+    participant Jinja as Jinja2
+
+    User->>Browser: Accede a /
+    Browser->>Flask: GET / HTTP Request
+    Flask->>Flask: Buscar ruta correspondiente
+    Note over Flask,Blog: Endpoint: blog.index
+
+    Flask->>Auth: load_logged_in_user()
+    Auth->>Auth: Obtener user_id de session
+
+    alt Usuario autenticado
+        Auth->>DB: get_db()
+        DB->>SQLite: SELECT * FROM user WHERE id = ?
+        SQLite-->>DB: Datos del usuario
+        DB-->>Auth: User
+        Auth->>Auth: Guardar usuario en g.user
+    else Usuario no autenticado
+        Auth->>Auth: g.user = None
+    end
+
+    Flask->>Blog: index()
+    Blog->>DB: get_db()
+    DB-->>Blog: Conexión SQLite
+
+    Blog->>SQLite: SELECT posts + users<br/>JOIN user ORDER BY created DESC
+    SQLite-->>Blog: Lista de publicaciones
+    Blog->>Blog: fetchall()
+
+    Blog->>Jinja: render_template(index.html, posts)
+    Jinja->>Jinja: Cargar base.html
+    Jinja->>Jinja: Renderizar publicaciones
+    Jinja->>Jinja: Comprobar g.user y autoría
+    Jinja-->>Blog: HTML generado
+
+    Blog-->>Flask: Devolver HTML
+    Flask->>Flask: Crear HTTP Response (200 OK)
+    Flask-->>Browser: HTTP 200 + HTML
+    Browser->>Browser: Mostrar página principal
+
+    Flask->>DB: close_db() al finalizar contexto
+    DB->>SQLite: Cerrar conexión
 ```
