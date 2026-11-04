@@ -1,7 +1,7 @@
 
 # flask --app flaskr init-db
 
-```Mermaid
+```mermaid
 sequenceDiagram
     autonumber
     actor User as Usuario / Terminal
@@ -41,7 +41,7 @@ sequenceDiagram
 ```
 # get
 
-```Mermaid
+```mermaid
 sequenceDiagram
     autonumber
     actor User as Usuario
