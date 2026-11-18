@@ -19,7 +19,16 @@
           <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
         {% endif %}
       </header>
-      <p class="body">{{ post['body'] }}</p>
+      <p class="category">
+        <h4>Category:</h4>
+        <br>
+        {{ post['category'] }}
+      </p>
+      <p class="body">
+        <h4>Body:</h4>
+        <br>
+        {{ post['body'] }}
+      </p>
     </article>
     {% if not loop.last %}
       <hr>
