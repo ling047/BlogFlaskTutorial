@@ -25,7 +25,7 @@ def index():
     #for post in posts:
     #    print("Entrada",dict(post))
     return render_template("blog/index.html", posts=posts)
-
+ 
 
 def get_post(id, check_author=True):
     """Get a post and its author by id.
