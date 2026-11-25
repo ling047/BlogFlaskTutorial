@@ -30,7 +30,7 @@ include = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-filterwarnings = ["error"]
+filterwarnings = ["error"] # qualsevol warning fa fallar el test
 
 [tool.coverage.run]
 branch = true

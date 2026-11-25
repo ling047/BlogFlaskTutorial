@@ -67,7 +67,7 @@ def create():
         title = request.form["title"]
         body = request.form["body"]
         category = request.form["category"]
-        print("Categoria", category)
+        #print("Categoria", category)
         error = None
 
         if not title:
